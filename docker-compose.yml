@@ -15,7 +15,7 @@ services:
     networks:
       - frontend-network
   frontend:
-    image:
+    build:
       context: ./transcendance-frontend/
       dockerfile: Dockerfile
     volumes:
@@ -24,7 +24,7 @@ services:
     networks:
       - frontend-network
   backend:
-    image:
+    build:
       context: ./transcendance-backend/
       dockerfile: Dockerfile
     volumes:
