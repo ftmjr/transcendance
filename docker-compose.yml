@@ -14,40 +14,40 @@ services:
       - frontend
     networks:
       - frontend-network
+
   frontend:
-    build:
-      context: ./transcendance-frontend/
-      dockerfile: Dockerfile
+    build: ./transcendance-frontend/
     volumes:
       - ./transcendance-frontend:/app
+      - /app/node_modules/
     ports:
       - "3000:3000"
+    networks:
+      - frontend-network
+
+  backend:
+    build: ./transcendance-backend/
+    volumes:
+      - ./transcendance-backend:/app
     command: yarn dev
     networks:
       - frontend-network
-  backend:
-    build:
-      context: ./transcendance-backend/
-      dockerfile: Dockerfile
-    volumes:
-      - ./transcendance-backend:/app
-    command: yarn start
-    networks:
-      - frontend-network
       - backend-network
+
   db:
     image: postgres:latest
-    env_file:
-      - .env
+    env_file: .env
     volumes:
       - db:/var/lib/postgresql/data
     networks:
       - backend-network
+
 networks:
   frontend-network:
     driver: bridge
   backend-network:
     driver: bridge
+
 volumes:
   db:
     driver: local
