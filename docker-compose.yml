@@ -30,7 +30,7 @@ services:
       context: ./transcendance-backend/
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/app
+      - ./transcendance-backend:/app
     command: yarn start
     networks:
       - frontend-network
