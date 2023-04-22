@@ -19,8 +19,10 @@ services:
       context: ./transcendance-frontend/
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/app
-    command: yarn start
+      - ./transcendance-frontend:/app
+    ports:
+      - "3000:3000"
+    command: yarn dev
     networks:
       - frontend-network
   backend:
