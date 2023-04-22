@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - frontend-network
+  frontend:
+    image:
+      context: ./transcendance-frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    command: yarn start
+    networks:
+      - frontend-network
+  backend:
+    image:
+      context: ./transcendance-backend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    command: yarn start
+    networks:
+      - frontend-network
+      - backend-network
+  db:
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - backend-network
+networks:
+  frontend-network:
+    driver: bridge
+  backend-network:
+    driver: bridge
+volumes:
+  db:
+    driver: local
+  frontend-prod-data:
+    driver: local
