@@ -4,7 +4,7 @@ services:
   web:
     image: nginx:latest
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -20,8 +20,6 @@ services:
     volumes:
       - ./transcendance-frontend:/app
       - /app/node_modules/
-    ports:
-      - "3000:3000"
     networks:
       - frontend-network
 
@@ -29,7 +27,7 @@ services:
     build: ./transcendance-backend/
     volumes:
       - ./transcendance-backend:/app
-    command: yarn dev
+    command: yarn start:dev
     networks:
       - frontend-network
       - backend-network
