@@ -27,6 +27,7 @@ services:
     build: ./transcendance-backend/
     volumes:
       - ./transcendance-backend:/app
+      - /app/node_modules/
     command: yarn start:dev
     networks:
       - frontend-network
