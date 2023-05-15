@@ -32,6 +32,9 @@ services:
     networks:
       - frontend-network
       - backend-network
+    ports:
+      - "5555:5555"
+    env_file: .env
 
   db:
     image: postgres:latest
