@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   web:
+    container_name: web
     image: nginx:latest
     ports:
       - "443:443"
@@ -15,6 +16,7 @@ services:
       - frontend-network
 
   frontend:
+    container_name: frontend
     build: ./transcendance-frontend/
     volumes:
       - ./transcendance-frontend:/app
@@ -24,6 +26,7 @@ services:
     env_file: .env
 
   backend:
+    container_name: backend
     build: ./transcendance-backend/
     volumes:
       - ./transcendance-backend:/app
@@ -37,10 +40,13 @@ services:
     env_file: .env
 
   db:
+    container_name: db
     image: postgres:latest
     env_file: .env
     volumes:
       - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
       - backend-network
 
