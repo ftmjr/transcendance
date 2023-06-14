@@ -5,6 +5,7 @@ services:
     container_name: web
     image: nginx:latest
     ports:
+      - "80:80"
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -20,7 +21,7 @@ services:
     build: ./transcendance-frontend/
     volumes:
       - ./transcendance-frontend:/app
-      - /app/node_modules/
+      - frontend-node-modules:/app/node_modules/
     networks:
       - frontend-network
     env_file: .env
@@ -30,7 +31,7 @@ services:
     build: ./transcendance-backend/
     volumes:
       - ./transcendance-backend:/app
-      - /app/node_modules/
+      - backend-node-modules:/app/node_modules/
     command: yarn start:dev
     networks:
       - frontend-network
@@ -61,3 +62,5 @@ volumes:
     driver: local
   frontend-prod-data:
     driver: local
+  frontend-node-modules:
+  backend-node-modules:
