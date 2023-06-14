@@ -34,7 +34,7 @@ Transcendance is a web application for participating in a Pong competition. The 
 git clone --recursive https://github.com/ftmjr/transcendance.git
 ```
 
-2. To set up the project, run `docker-compose up --build`.
+2. To set up the project, write the .env file and  run `docker-compose up`.
 
 While developing, it's a good idea to open the submodule (either backend or frontend) in a separate editor to ensure correct linting.
 
