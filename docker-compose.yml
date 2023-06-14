@@ -38,6 +38,7 @@ services:
       - backend-network
     ports:
       - "3001:3001" # need to be closed in production
+      - "5555:5555"
     env_file: .env
 
   db:
