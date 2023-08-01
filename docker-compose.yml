@@ -13,6 +13,8 @@ services:
     depends_on:
       - backend
       - frontend
+    environment:
+      - APP_URL=${URL}
     networks:
       - frontend-network
 
