@@ -27,6 +27,8 @@ services:
     networks:
       - frontend-network
     env_file: .env
+    environment:
+      - VITE_APP_URL=${URL}
 
   backend:
     container_name: backend
