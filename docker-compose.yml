@@ -39,9 +39,12 @@ services:
     volumes:
       - ./transcendance-backend/src:/app/src # need to be open for dev, but not necessary in production
       - ./transcendance-backend/prisma:/app/prisma # need to be open for dev, but not necessary in production
+      - uploads:/app/uploads
     networks:
       - frontend-network
       - backend-network
+    depends_on:
+      - backend
     env_file: .env
 
   db:
