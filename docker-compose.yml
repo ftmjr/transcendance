@@ -44,7 +44,7 @@ services:
       - frontend-network
       - backend-network
     depends_on:
-      - backend
+      - db
     env_file: .env
 
   db:
