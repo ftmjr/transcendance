@@ -10,9 +10,10 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/certs:/etc/nginx/certs
+      - frontend-prod-data:/usr/share/nginx/html
+      - uploads:/usr/share/nginx/html/uploads
     depends_on:
       - backend
-      - frontend
     networks:
       - frontend-network
 
@@ -20,24 +21,28 @@ services:
     container_name: frontend
     build: ./transcendance-frontend/
     volumes:
-      - ./transcendance-frontend:/app
-      - frontend-node-modules:/app/node_modules/
+      - ./transcendance-frontend:/app # remove this line if you want to use the production build
+      - frontend-node-modules:/app/node_modules/ # remove this line if you want to use the production build
+      - frontend-prod-data:/app/dist
     networks:
       - frontend-network
     env_file: .env
 
   backend:
     container_name: backend
+    depends_on:
+      - db
     build: ./transcendance-backend/
     volumes:
-      - ./transcendance-backend:/app
-      - backend-node-modules:/app/node_modules/
+      - ./transcendance-backend:/app # remove this line if you want to use the production build
+      - backend-node-modules:/app/node_modules/ # remove this line if you want to use the production build
+      - uploads:/app/uploads
+      
     command: yarn start:dev
     networks:
       - frontend-network
       - backend-network
     ports:
-      - "3001:3001" # need to be closed in production
       - "5555:5555"
     env_file: .env
 
@@ -47,8 +52,6 @@ services:
     env_file: .env
     volumes:
       - db:/var/lib/postgresql/data
-    expose:
-      - "5432"
     networks:
       - backend-network
 
@@ -62,6 +65,8 @@ volumes:
   db:
     driver: local
   frontend-prod-data:
+    driver: local
+  uploads:
     driver: local
   frontend-node-modules:
   backend-node-modules:
