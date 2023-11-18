@@ -24,6 +24,7 @@ services:
       - ./transcendance-frontend:/app # remove this line if you want to use the production build
       - frontend-node-modules:/app/node_modules/ # remove this line if you want to use the production build
       - frontend-prod-data:/app/dist
+      - uploads:/app/dist/uploads
     networks:
       - frontend-network
     env_file: .env
