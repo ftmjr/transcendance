@@ -52,3 +52,8 @@ This project is developed and maintained by the FTMJR - Team organization. Speci
 
 We use a [GitHub project board](https://github.com/orgs/ftmjr/projects/1/views/1) to manage and track the progress of the project. All changes to the `main` branch in the submodules and `master` branch in the main repository should be made via pull requests from the `develop` branch.
 
+## PreBuild Version
+
+- you may need to run yarn build in frontend to see the website.
+
+
