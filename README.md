@@ -55,6 +55,6 @@ We use a [GitHub project board](https://github.com/orgs/ftmjr/projects/1/views/1
 ## PreBuild Version
 
 - you may need to run yarn build in frontend to see the website.
-- remove liones in NGINX TO SWITCH BACK TO A DEVELOP mode with frontend 
+- remove lines in nginx config to use in dev or prod 
 
 
