@@ -12,6 +12,8 @@ services:
       - ./nginx/entrypoint.sh:/docker-entrypoint.d/startup.sh # startup script select dev or prod conf
       - ./nginx/dev.conf:/dev.conf # dev conf
       - ./nginx/prod.conf:/prod.conf # prod conf
+      - frontend-prod-data:/usr/share/nginx/html # vite build prod
+      - uploads:/usr/share/nginx/html/uploads # uploads
     depends_on:
       - backend
     networks:
