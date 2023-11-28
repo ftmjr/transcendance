@@ -19,13 +19,13 @@ jobs:
           git rm --cached -r .
           git add .
           git commit -m "Remove submodules references"
-      - name: Create zip artifact
-        run: |
-          zip -r transcendance.zip .
       - name: Set up Git
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"    
+          git config  user.name "${{ github.actor }}"
+          git config  user.email "${{ github.actor }}@users.noreply.github.com"   
+      - name: Create Zip Artifact
+        run: |
+          git archive -o transcendance.zip HEAD
       - name: Create a release
         uses: actions/create-release@v1
         env:
