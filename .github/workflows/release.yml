@@ -1,0 +1,37 @@
+# release for a version prod version with all submodules code
+name: Create a release
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - name: Remove submodules references
+        run: |
+          git submodule deinit --all -f
+          git rm --cached -r .
+          git add .
+          git commit -m "Remove submodules references"
+      - name: Create zip artifact
+        run: |
+          zip -r transcendance.zip .
+      - name: Create a release
+        uses: actions/create-release@v2
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            draft: true
+            prerelease: false
+            body: |
+              Release ${{ github.ref }}
+            commit: ${{ github.sha }}
+            files: transcendance.zip
