@@ -22,6 +22,10 @@ jobs:
       - name: Create zip artifact
         run: |
           zip -r transcendance.zip .
+      - name: Set up Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"    
       - name: Create a release
         uses: actions/create-release@v1
         env:
